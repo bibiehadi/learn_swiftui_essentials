@@ -1,39 +1,35 @@
-////
-////  ContentView.swift
-////  Landmarks
-////
-////  Created by Bibie Hadi Kusuma on 13/01/25.
-////
 //
-//import SwiftUI
+//  ContentView.swift
+//  Landmarks
 //
-//struct ContentView: View {
-//    var body: some View {
-//        MapView()
-//            .frame(height: 300)
-//        CircleImageView()
-//            .offset(y: -130)
-//            .padding(.bottom, -130)
-//        VStack(alignment: .leading) {
-//            Text("Turtle Rock")
-//                .font(.title)
-//            HStack {
-//                Text("Joshua Tree National Park")
-//                Spacer()
-//                Text("California")
-//            }
-//            .font(.subheadline)
-//            .foregroundStyle(.secondary)
-//            Divider()
-//            Text("About Turtle Rock")
-//                .font(.title2)
-//            Text("Descriptive text goes here")
-//        }
-//        .padding()
-//        Spacer()
-//    }
-//}
+//  Created by Bibie Hadi Kusuma on 16/01/25.
 //
-//#Preview {
-//    ContentView()
-//}
+
+import SwiftUI
+
+struct ContentView: View {
+    @State private var selection: Tab = .featured
+    enum Tab {
+        case featured
+        case list
+    }
+    var body: some View {
+        TabView(selection: $selection) {
+            CategoryHome()
+                .tabItem {
+                    Label("Featured", systemImage: "star")
+                }
+                .tag(Tab.featured)
+            LandmarkList()
+                .tabItem{
+                    Label("List", systemImage: "list.bullet")
+                }
+                .tag(Tab.list)
+        }
+    }
+}
+
+#Preview {
+    ContentView()
+        .environment(ModelData())
+}
