@@ -26,7 +26,7 @@ struct CategoryRow: View {
                             CategoryItem(landmark: landmark)
                         }
                     }
-                }
+                }.padding(.bottom)
             }
         }
     }
